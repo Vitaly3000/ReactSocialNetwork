@@ -1,3 +1,5 @@
+import { rerenderEntireTree } from "../render";
+
 let state = {
   messagesPage: {
     dialogs: [
@@ -35,4 +37,16 @@ let state = {
     ],
   },
 };
+export let addPost = (postMessage) => {
+  let newPost = {
+    text: postMessage,
+    id: 1,
+    likesCount: 11,
+    img:
+      'https://i.pinimg.com/originals/80/e5/0d/80e50d775e936217f89af2de58ba7646.jpg',
+  };
+  state.profilePage.posts.push(newPost);
+  rerenderEntireTree(state)
+};
+rerenderEntireTree(state)
 export default state;

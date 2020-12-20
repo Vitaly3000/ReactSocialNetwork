@@ -13,7 +13,7 @@ function App(props) {
         <Navbar />
         <div className="content">
           <Route path="/Dialogs" render ={()=> <Dialogs dialogs={props.state.messagesPage.dialogs} messages = {props.state.messagesPage.messages}/>} />
-          <Route path="/Profile" render ={()=> <Profile posts={props.state.profilePage.posts}/>} />
+          <Route path="/Profile" render ={()=> <Profile posts={props.state.profilePage.posts} addPost={props.addPost}/>} />
         </div>
       </div>
     </BrowserRouter>
