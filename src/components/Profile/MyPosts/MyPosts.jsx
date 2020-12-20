@@ -7,13 +7,18 @@ const MyPosts = (props) => {
   let postsElements = props.posts.map((post) => (
     <Post img={post.img} message={post.text} />
   ));
+  let newPostElement = React.createRef();
+  let addPost = () => {
+    let text = newPostElement.current.value;
+    alert(text);
+  }
   return (
     <div>
       <div>
-        <textarea placeholder="мой пост"></textarea>
+        <textarea ref={newPostElement}placeholder="мой пост"></textarea>
       </div>
       <div>
-        <button>Добавить пост</button>
+        <button onClick={addPost}>Добавить пост</button>
       </div>
       {postsElements}
     </div>
