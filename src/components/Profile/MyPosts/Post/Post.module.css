@@ -1,0 +1,13 @@
+.item {
+  color: crimson;
+  display: flex;
+  align-items: center;
+  border: 4px solid teal;
+  margin-top: 10px;
+}
+.item img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
