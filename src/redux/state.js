@@ -1,4 +1,4 @@
-import { rerenderEntireTree } from "../render";
+import { rerenderEntireTree } from '../render';
 
 let state = {
   messagesPage: {
@@ -35,18 +35,24 @@ let state = {
           'https://i.pinimg.com/originals/53/f9/8a/53f98a6b76f60356b2b4c261963377e6.jpg',
       },
     ],
+    newPostText: '',
   },
 };
-export let addPost = (postMessage) => {
+export let addPost = () => {
   let newPost = {
-    text: postMessage,
+    text: state.profilePage.newPostText,
     id: 1,
     likesCount: 11,
     img:
       'https://i.pinimg.com/originals/80/e5/0d/80e50d775e936217f89af2de58ba7646.jpg',
   };
   state.profilePage.posts.push(newPost);
-  rerenderEntireTree(state)
+  state.profilePage.newPostText = '';
+  rerenderEntireTree(state);
 };
-rerenderEntireTree(state)
+export let updateNewPostText = (newText) => {
+  state.profilePage.newPostText = newText;
+  rerenderEntireTree(state);
+};
+rerenderEntireTree(state);
 export default state;
