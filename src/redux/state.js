@@ -17,6 +17,7 @@ let store = {
         { message: 'i also feel good', id: 7 },
       ],
     },
+
     profilePage: {
       posts: [
         {
@@ -37,27 +38,36 @@ let store = {
       newPostText: '',
     },
   },
-  getState() {
-    return this._state;
-  },
   _callSubscriber() {
     console.log('state was changed');
   },
-  addPost() {
-    let newPost = {
-      text: this._state.profilePage.newPostText,
-      id: 1,
-      likesCount: 11,
-      img:
-        'https://i.pinimg.com/originals/80/e5/0d/80e50d775e936217f89af2de58ba7646.jpg',
-    };
-    this._state.profilePage.posts.push(newPost);
-    this._state.profilePage.newPostText = '';
-    this._callSubscriber(this._state);
+  dispatch(action) {
+    switch (action.type) {
+      case 'ADD-POST':
+        {
+          let newPost = {
+            text: this._state.profilePage.newPostText,
+            id: 1,
+            likesCount: 11,
+            img:
+              'https://i.pinimg.com/originals/80/e5/0d/80e50d775e936217f89af2de58ba7646.jpg',
+          };
+          this._state.profilePage.posts.push(newPost);
+          this._state.profilePage.newPostText = '';
+          this._callSubscriber(this._state);
+        }
+        break;
+      case 'UPDATE-NEW-POST-TEXT':
+        {
+          this._state.profilePage.newPostText = action.newText;
+          this._callSubscriber(this._state);
+        }
+        break;
+    }
   },
-  updateNewPostText(newText) {
-    this._state.profilePage.newPostText = newText;
-    this._callSubscriber(this._state);
+
+  getState() {
+    return this._state;
   },
   subscribe(observer) {
     this._callSubscriber = observer;
