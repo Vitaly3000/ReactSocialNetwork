@@ -2,20 +2,18 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import reportWebVitals from './reportWebVitals';
 
-import state, { subscribe } from './redux/state';
+import store from './redux/state';
 
 import './index.css';
 import App from './App';
-
-import { addPost, updateNewPostText } from './redux/state';
 
 let rerenderEntireTree = (state) => {
   ReactDOM.render(
     <React.StrictMode>
       <App
         state={state}
-        addPost={addPost}
-        updateNewPostText={updateNewPostText}
+        addPost={store.addPost.bind(store)}
+        updateNewPostText={store.updateNewPostText.bind(store)}
       />
     </React.StrictMode>,
     document.getElementById('root'),
@@ -27,5 +25,5 @@ let rerenderEntireTree = (state) => {
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
 
-rerenderEntireTree(state);
-subscribe(rerenderEntireTree);
+rerenderEntireTree(store.getState());
+store.subscribe(rerenderEntireTree);
