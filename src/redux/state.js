@@ -1,3 +1,7 @@
+const ADD_POST = 'ADD-POST';
+const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
+const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT';
+const SEND_MESSAGE = 'SEND-MESSAGE';
 let store = {
   _state: {
     messagesPage: {
@@ -16,6 +20,7 @@ let store = {
         { message: 'and you?', id: 6 },
         { message: 'i also feel good', id: 7 },
       ],
+      newMessageText: '',
     },
 
     profilePage: {
@@ -63,6 +68,23 @@ let store = {
           this._callSubscriber(this._state);
         }
         break;
+      case 'UPDATE-NEW-MESSAGE-TEXT':
+        {
+          this._state.messagesPage.newMessageText = action.newText;
+          this._callSubscriber(this._state);
+        }
+        break;
+      case 'SEND-MESSAGE':
+        {
+          let newMessage = {
+            message: this._state.messagesPage.newMessageText,
+            id: 1,
+          };
+          this._state.messagesPage.messages.push(newMessage);
+          this._state.messagesPage.newMessageText = '';
+          this._callSubscriber(this._state);
+        }
+        break;
     }
   },
 
@@ -73,5 +95,13 @@ let store = {
     this._callSubscriber = observer;
   },
 };
+export const updateNewMessageTextActionCreater = (text) => {
+  return { type: UPDATE_NEW_MESSAGE_TEXT, newText: text };
+};
+export const sendMessageActionCreator = () => ({ type: SEND_MESSAGE });
+export const updateNewPostTextActionCreater = (text) => {
+  return { type: UPDATE_NEW_POST_TEXT, newText: text };
+};
+export const addPostActionCreator = () => ({ type: ADD_POST });
 
 export default store;
