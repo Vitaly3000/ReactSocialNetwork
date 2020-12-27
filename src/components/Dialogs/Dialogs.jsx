@@ -4,10 +4,6 @@ import s from './Dialogs.module.css';
 import DialogItem from './DialogItem/DialogItem';
 import Message from './Message/Message';
 
-import {
-  sendMessageActionCreator,
-  updateNewMessageTextActionCreater,
-} from '../../redux/dialogs-reducer';
 
 const Dialogs = (props) => {
   let DialogsElements = props.dialogs.map((dialog) => (
@@ -21,8 +17,10 @@ const Dialogs = (props) => {
     props.sendMessage();
   };
   let onChangeMessage = (e) => {
+    
     let text = e.target.value;
     props.updateNewMessageText(text);
+    
   };
 
   return (
