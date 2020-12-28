@@ -31,16 +31,14 @@ const profileReducer = (state = initialState, action) => {
         img:
           'https://i.pinimg.com/originals/80/e5/0d/80e50d775e936217f89af2de58ba7646.jpg',
       };
-      let stateCopy = { ...state };
-      stateCopy.posts = [...state.posts];
-      stateCopy.posts.push(newPost);
-      stateCopy.newPostText = '';
-      return stateCopy;
+      return {
+        ...state,
+        newPostText: '',
+        posts: [...state.posts, newPost],
+      };
     }
     case 'UPDATE-NEW-POST-TEXT': {
-      let stateCopy = { ...state };
-      stateCopy.newPostText = action.newText;
-      return stateCopy;
+      return { ...state, newPostText: action.newText };
     }
     default: {
       return state;
