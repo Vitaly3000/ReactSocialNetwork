@@ -1,0 +1,16 @@
+.users {
+  background-color: darkslategray;
+}
+.user {
+  border: 2px solid chocolate;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.photo {
+  width: 150px;
+  height: 150px;
+  border-top-right-radius: 50%;
+  border-top-left-radius: 50%;
+  border-bottom-right-radius: 50%;
+}
