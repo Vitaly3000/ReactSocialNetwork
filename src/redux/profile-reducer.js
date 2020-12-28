@@ -1,7 +1,6 @@
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 
-
 let initialState = {
   posts: [
     {
@@ -20,11 +19,11 @@ let initialState = {
     },
   ],
   newPostText: '',
-}
+};
 
 const profileReducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'ADD-POST':
+    case 'ADD-POST': {
       let newPost = {
         text: state.newPostText,
         id: 1,
@@ -32,23 +31,24 @@ const profileReducer = (state = initialState, action) => {
         img:
           'https://i.pinimg.com/originals/80/e5/0d/80e50d775e936217f89af2de58ba7646.jpg',
       };
-      state.posts.push(newPost);
-      state.newPostText = '';
-
-      return state;
-
-    case 'UPDATE-NEW-POST-TEXT':
-      state.newPostText = action.newText;
-
-      return state;
-
+      let stateCopy = { ...state };
+      stateCopy.posts = [...state.posts];
+      stateCopy.posts.push(newPost);
+      stateCopy.newPostText = '';
+      return stateCopy;
+    }
+    case 'UPDATE-NEW-POST-TEXT': {
+      let stateCopy = { ...state };
+      stateCopy.newPostText = action.newText;
+      return stateCopy;
+    }
     default: {
       return state;
     }
   }
 };
 export const updateNewPostTextActionCreater = (text) => {
- return { type: UPDATE_NEW_POST_TEXT, newText: text };
+  return { type: UPDATE_NEW_POST_TEXT, newText: text };
 };
 export const addPostActionCreator = () => ({ type: ADD_POST });
 export default profileReducer;
