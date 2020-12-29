@@ -1,53 +1,29 @@
 import React from 'react';
-import s from './Users.module.css';
+import style from './Users.module.css';
+import * as axios from 'axios';
+import userPhoto from '../../assets/img/user.jpg';
+
 const Users = (props) => {
   if (props.users.length === 0) {
-    props.setUsers([
-      {
-        name: 'Vitaly',
-        id: 1,
-        lastname: 'Smith',
-        photo:
-          'https://c.files.bbci.co.uk/16620/production/_91408619_55df76d5-2245-41c1-8031-07a4da3f313f.jpg',
-        nameCity: 'Tula',
-        country: 'Russia',
-        followed: false,
-      },
-      {
-        name: 'Yarik',
-        id: 2,
-        lastname: 'Bochek',
-        photo:
-          'https://c.files.bbci.co.uk/16620/production/_91408619_55df76d5-2245-41c1-8031-07a4da3f313f.jpg',
-        nameCity: 'Kiev',
-        country: 'Ukraine',
-        followed: true,
-      },
-      {
-        name: 'Sergey',
-        id: 3,
-        lastname: 'Sviridov',
-        photo:
-          'https://c.files.bbci.co.uk/16620/production/_91408619_55df76d5-2245-41c1-8031-07a4da3f313f.jpg',
-        nameCity: 'Moscow',
-        country: 'Russia',
-        followed: false,
-      },
-    ]);
+    axios
+      .get('https://social-network.samuraijs.com/api/1.0/users')
+      .then((responce) => {
+        props.setUsers(responce.data.items);
+      });
   }
 
   return (
-    <div className={s.users}>
+    <div className={style.users}>
       {props.users.map((u) => {
         return (
-          <div className={s.user}>
-            <img className={s.photo} src={u.photo} alt="a sad frog" />
-            <div className={s.name}>
-              {u.name} {u.lastname}
-            </div>
-            <div>
-              {u.nameCity} {u.country}
-            </div>
+          <div className={style.user}>
+            <img
+              className={style.photo}
+              src={u.photo ? u.small : userPhoto}
+              alt="a sad frog"
+            />
+            <div className={style.name}>{u.name}</div>
+
             <button
               onClick={() => {
                 props.toggleFollow(u.id);
