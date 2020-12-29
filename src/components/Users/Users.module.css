@@ -1,6 +1,10 @@
 .users {
   background-color: darkslategray;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
 }
+
 .user {
   border: 2px solid chocolate;
   padding: 10px;
