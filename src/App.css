@@ -2,6 +2,7 @@ body {
   background-color: midnightblue;
   font-weight: bold;
   font-size: 24px;
+  box-sizing: border-box;
 }
 a {
   text-decoration: none;
