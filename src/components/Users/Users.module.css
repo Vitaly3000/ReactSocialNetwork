@@ -3,6 +3,7 @@
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
+  height: 100vh;
 }
 .paginator {
   width: 100%;
@@ -44,3 +45,4 @@ button:active {
   border-top-left-radius: 50%;
   border-bottom-right-radius: 50%;
 }
+
