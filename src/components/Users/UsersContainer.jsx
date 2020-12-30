@@ -10,6 +10,7 @@ import {
 } from '../../redux/users-reducer';
 
 import Users from './Users';
+import Preloader from '../common/preloader/preloader';
 
 class UsersContainer extends React.Component {
   componentDidMount() {
@@ -40,15 +41,21 @@ class UsersContainer extends React.Component {
   };
   render() {
     return (
-      <Users
-        isFetching={this.props.isFetching}
-        users={this.props.users}
-        totalUsersCount={this.props.totalUsersCount}
-        pageSize={this.props.pageSize}
-        currentPage={this.props.currentPage}
-        onPageChanged={this.onPageChanged}
-        toggleFollow={this.props.toggleFollow}
-      />
+      <>
+        {this.props.isFetching ? (
+          <Preloader />
+        ) : (
+          <Users
+            isFetching={this.props.isFetching}
+            users={this.props.users}
+            totalUsersCount={this.props.totalUsersCount}
+            pageSize={this.props.pageSize}
+            currentPage={this.props.currentPage}
+            onPageChanged={this.onPageChanged}
+            toggleFollow={this.props.toggleFollow}
+          />
+        )}
+      </>
     );
   }
 }
