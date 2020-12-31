@@ -1,8 +1,9 @@
 import React from 'react';
 import style from './Users.module.css';
 import userPhoto from '../../assets/img/user.jpg';
-import Preloader from '../common/preloader/preloader';
+
 import { NavLink } from 'react-router-dom';
+import * as axios from 'axios';
 const Users = (props) => {
   let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
   let pages = [];
@@ -37,7 +38,41 @@ const Users = (props) => {
 
             <button
               onClick={() => {
-                props.toggleFollow(u.id);
+                console.log(u.followed);
+                if (!u.followed) {
+                  axios
+                    .post(
+                      `https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,
+                      {},
+                      {
+                        withCredentials: true,
+                        headers: {
+                          'API-KEY': '7dd38746-eefb-4807-bae3-6e3f38936285',
+                        },
+                      },
+                    )
+                    .then((response) => {
+                      if (response.data.resultCode == 0) {
+                        props.toggleFollow(u.id);
+                      }
+                    });
+                } else if(u.followed) {
+                  axios
+                    .delete(
+                      `https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,
+                      {
+                        withCredentials: true,
+                        headers: {
+                          'API-KEY': '7dd38746-eefb-4807-bae3-6e3f38936285',
+                        },
+                      },
+                    )
+                    .then((response) => {
+                      if (response.data.resultCode == 0) {
+                        props.toggleFollow(u.id);
+                      }
+                    });
+                }
               }}>
               {u.followed ? 'Отписаться' : 'Подписаться'}
             </button>
