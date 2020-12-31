@@ -14,9 +14,9 @@ a {
 .app-wrapper {
   display: grid;
   grid-template-areas:
-  " header header"
+  " header header "
   "nav content";
-  grid-template-rows: 60px 1fr;
+  grid-template-rows: auto 1fr;
   grid-template-columns:2fr 10fr;
   
   background-color: darkcyan;
