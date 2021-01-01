@@ -37,41 +37,25 @@ const Users = (props) => {
             <div className={style.name}>{u.name}</div>
 
             <button
+              disabled={props.followingInProgress.some((id) => id === u.id)}
               onClick={() => {
-                console.log(u.followed);
+                props.toggleFollowingProgress(true, u.id);
+
                 if (!u.followed) {
-                  axios
-                    .post(
-                      `https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,
-                      {},
-                      {
-                        withCredentials: true,
-                        headers: {
-                          'API-KEY': '7dd38746-eefb-4807-bae3-6e3f38936285',
-                        },
-                      },
-                    )
-                    .then((response) => {
-                      if (response.data.resultCode == 0) {
-                        props.toggleFollow(u.id);
-                      }
-                    });
-                } else if(u.followed) {
-                  axios
-                    .delete(
-                      `https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,
-                      {
-                        withCredentials: true,
-                        headers: {
-                          'API-KEY': '7dd38746-eefb-4807-bae3-6e3f38936285',
-                        },
-                      },
-                    )
-                    .then((response) => {
-                      if (response.data.resultCode == 0) {
-                        props.toggleFollow(u.id);
-                      }
-                    });
+                  props.followUser(u.id).then((data) => {
+                    props.toggleFollowingProgress(false, u.id);
+                    if (data.resultCode === 0) {
+                      props.toggleFollow(u.id);
+                    }
+                  });
+                } else if (u.followed) {
+                  props.toggleFollowingProgress(true, u.id);
+                  props.unfollowUser(u.id).then((data) => {
+                    props.toggleFollowingProgress(false, u.id);
+                    if (data.resultCode === 0) {
+                      props.toggleFollow(u.id);
+                    }
+                  });
                 }
               }}>
               {u.followed ? 'Отписаться' : 'Подписаться'}
