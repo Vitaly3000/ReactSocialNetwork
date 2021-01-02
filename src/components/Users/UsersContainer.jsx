@@ -15,6 +15,7 @@ import {
 
 import Users from './Users';
 import Preloader from '../common/preloader/preloader';
+import { compose } from 'redux';
 
 class UsersContainer extends React.Component {
   componentDidMount() {
@@ -76,13 +77,15 @@ let mapStateToProps = (state) => {
 //   };
 // };
 
-export default connect(mapStateToProps, {
-  setUsers,
-  setCurrentPage,
-  setTotalUsersCount,
-  toggleIsFetching,
+export default compose(
+  connect(mapStateToProps, {
+    setUsers,
+    setCurrentPage,
+    setTotalUsersCount,
+    toggleIsFetching,
 
-  getUsers,
-  follow,
-  unfollow,
-})(UsersContainer);
+    getUsers,
+    follow,
+    unfollow,
+  }),
+)(UsersContainer);
