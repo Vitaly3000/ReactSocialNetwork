@@ -17,7 +17,7 @@ const Header = (props) => {
       ) : (
         <NavLink to="/login">
           <span>Вы не вошли</span>
-          <div>email: jyw18078@zwoho.com</div>
+          <div>email: eiz57720@cuoly.com</div>
           <div>1q2w3e1a2s3d</div>
         </NavLink>
       )}

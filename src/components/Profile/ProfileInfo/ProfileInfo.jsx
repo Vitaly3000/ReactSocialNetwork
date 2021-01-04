@@ -1,26 +1,28 @@
 import React from 'react';
-
+import style from './ProfileInfo.module.css';
 import userPhoto from '../../../assets/img/user.jpg';
 import ProfileStatus from './ProfileStatus';
 const ProfileInfo = (props) => {
   return (
     <div>
-      <div>
-        <img src="https://kittentoob.com/wp-content/uploads/2014/10/orange-cat.jpg" />
-      </div>
-      {props.profile ? (
+      {props.profile && (
         <div>
           <img
-            src={
-              props.profile.photos.large
-                ? props.profile.photos.large
-                : userPhoto
-            }
+            className={style.profileImg}
+            src={props.profile.photos.large || userPhoto}
             alt=""
           />
+          <div>
+            <span>{props.status || 'Статуса нету'}</span>
+          </div>
         </div>
-      ) : (
-        <ProfileStatus status={'testStatus'} />
+      )}
+      <hr />
+      {props.isAuth && (
+        <ProfileStatus
+          updateStatus={props.updateStatus}
+          status={props.status}
+        />
       )}
     </div>
   );
