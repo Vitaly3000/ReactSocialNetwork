@@ -5,9 +5,7 @@ import {
   setCurrentPage,
   setTotalUsersCount,
   setUsers,
-  toggleFollow,
   toggleIsFetching,
-  toggleFollowingProgress,
   getUsers,
   follow,
   unfollow,
@@ -57,25 +55,6 @@ let mapStateToProps = (state) => {
     followingInProgress: state.usersPage.followingInProgress,
   };
 };
-// let mapDispatchToProps = (dispatch) => {
-//   return {
-//     toggleFollow: (userId) => {
-//       dispatch(toggleFollowActionCreator(userId));
-//     },
-//     setUsers: (users) => {
-//       dispatch(setUsersActionCreator(users));
-//     },
-//     setCurrentPage: (pageNumber) => {
-//       dispatch(setCurrentPageActionCreator(pageNumber));
-//     },
-//     setTotalUsersCount: (totalUsersCount) => {
-//       dispatch(setTotalUsersCountActionCreator(totalUsersCount));
-//     },
-//     toggleIsFetching: (isFetching) => {
-//       dispatch(toggleIsFetchingActionCreator(isFetching));
-//     },
-//   };
-// };
 
 export default compose(
   connect(mapStateToProps, {
@@ -83,7 +62,6 @@ export default compose(
     setCurrentPage,
     setTotalUsersCount,
     toggleIsFetching,
-
     getUsers,
     follow,
     unfollow,
