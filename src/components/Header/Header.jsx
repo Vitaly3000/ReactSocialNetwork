@@ -13,6 +13,7 @@ const Header = (props) => {
           <span>id: {props.userId}</span>
           <span>email: {props.email}</span>
           <span>login: {props.login}</span>
+          <button onClick={props.logout}>Выйти</button>
         </>
       ) : (
         <NavLink to="/login">
