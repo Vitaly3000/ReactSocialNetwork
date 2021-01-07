@@ -5,7 +5,7 @@ import { Field, reduxForm } from 'redux-form';
 import { login } from '../../redux/auth-reducer';
 import { required } from '../../utils/validators/validators';
 import { Input } from '../common/FormsControls/FormsControls';
-
+import style from './../common/FormsControls/FormsControls.module.css';
 const LoginPage = (props) => {
   const logIn = (formData) => {
     let { email, password, rememberMe } = formData;
@@ -46,6 +46,7 @@ const LoginForm = (props) => {
         <label>RememberMe</label>
       </div>
       <button>log in</button>
+      {props.error && <div className={style.commonError}>{props.error}</div>}
     </form>
   );
 };
