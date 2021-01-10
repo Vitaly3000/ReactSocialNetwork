@@ -1,9 +1,14 @@
 .item {
   color: crimson;
   display: flex;
-  align-items: center;
+
   border: 4px solid teal;
   margin-top: 10px;
+  justify-content: space-between;
+}
+.item_content {
+  display: flex;
+  align-items: center;
 }
 .item img {
   width: 150px;
