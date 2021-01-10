@@ -8,7 +8,12 @@ import { Textarea } from '../../common/FormsControls/FormsControls';
 import Post from './Post/Post';
 const MyPosts = (props) => {
   let postsElements = props.posts.map((post) => (
-    <Post img={post.img} message={post.text} />
+    <Post
+      idPost={post.id}
+      img={post.img}
+      message={post.text}
+      onDeletePost={props.deletePost}
+    />
   ));
   let onAddPost = (value) => {
     props.addPost(value.newPostText);

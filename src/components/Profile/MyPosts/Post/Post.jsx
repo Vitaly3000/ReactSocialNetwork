@@ -1,11 +1,22 @@
 import React from 'react';
-import s from './Post.module.css';
+import style from './Post.module.css';
 const Post = (props) => {
   return (
-    <div className={s.item}>
-      {props.img ? <img src={props.img} alt="" /> : ''}
+    <div className={style.item}>
+      <div className={style.item_content}>
+        {props.img ? <img src={props.img} alt="" /> : ''}
+        {props.message}
+      </div>
 
-      {props.message}
+      <div className={style.btn_delete}>
+        <span>{props.idPost}</span>
+        <button
+          onClick={() => {
+            props.onDeletePost(props.idPost);
+          }}>
+          X
+        </button>
+      </div>
     </div>
   );
 };
