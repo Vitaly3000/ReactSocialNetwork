@@ -19,7 +19,6 @@ const Header = (props) => {
         <NavLink to="/login">
           <span>Вы не вошли</span>
           <div>email: eiz57720@cuoly.com</div>
-          <div>1q2w3e1a2s3d</div>
         </NavLink>
       )}
     </header>

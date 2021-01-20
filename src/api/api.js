@@ -59,6 +59,11 @@ export let profileAPI = {
         return response.data;
       });
   },
+  saveProfile(profile) {
+    return instance.put('profile', profile).then((response) => {
+      return response.data;
+    });
+  },
 };
 export let authAPI = {
   me() {
