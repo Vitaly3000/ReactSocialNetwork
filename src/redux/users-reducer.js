@@ -72,7 +72,7 @@ export const toggleFollow = (userId) => {
 export const setUsers = (users) => {
   return { type: SET_USERS, users };
 };
-export const setCurrentPage = (pageNumber) => {
+export const setCurrentPage = (pageNumber=1) => {
   return { type: SET_CURRENT_PAGE, pageNumber };
 };
 export const setTotalUsersCount = (totalUsersCount) => {
@@ -108,6 +108,7 @@ export let unfollow = (userId) => {
 };
 
 export let requestUsers = (currentPage, pageSize) => {
+  
   return async (dispatch) => {
     dispatch(toggleIsFetching(true));
     let data = await usersAPI.getUsers(currentPage, pageSize);

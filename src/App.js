@@ -3,7 +3,7 @@ import './App.css';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { Provider } from 'react-redux';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Redirect, Switch } from 'react-router-dom';
 import { Route, withRouter } from 'react-router-dom';
 import { initializeApp } from './redux/app-reducer';
 import store from './redux/redux-store';
@@ -33,10 +33,17 @@ class App extends React.Component {
         <HeaderContainer />
         <Navbar />
         <div className="content">
-          <Route path="/dialogs" render={() => <DialogsContainer />} />
-          <Route path="/profile/:userId?" render={() => <ProfileContainer />} />
-          <Route path="/users" render={() => <UsersContainer />} />
-          <Route path="/login" render={() => <LoginPage />} />
+          <Switch>
+          <Route path='/' exact><Redirect to='/profile'/></Route>
+            <Route path="/dialogs" render={() => <DialogsContainer />} />
+            <Route
+              path="/profile/:userId?"
+              render={() => <ProfileContainer />}
+            />
+            <Route path="/users" render={() => <UsersContainer />} />
+            <Route path="/login" render={() => <LoginPage />} />
+            <Route path="*" render={() => <div>404</div>} />
+          </Switch>
         </div>
       </div>
     );
