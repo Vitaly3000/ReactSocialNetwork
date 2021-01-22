@@ -34,7 +34,7 @@ const ProfileInfo = (props) => {
             </div>
           </div>
           {editMode ? (
-            <ProfileDataEdit profile={props.profile} onSubmit={onSubmit} />
+            <ProfileDataEdit initialValues={props.profile} profile={props.profile} onSubmit={onSubmit} />
           ) : (
             <ProfileData
               profile={props.profile}

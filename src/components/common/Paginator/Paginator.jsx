@@ -11,6 +11,7 @@ const Paginator = ({ portionSize = 10, ...props }) => {
   for (let i = 1; i <= pagesCount; i++) {
     pages.push(i);
   }
+
   return (
     <div className={style.paginator}>
       {portionNumber > 1 && (
