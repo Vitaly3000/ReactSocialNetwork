@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import style from './ProfileInfo.module.css';
 import userPhoto from '../../../assets/img/user.jpg';
 import ProfileStatus from './ProfileStatus';
-import ProfileDataFormReduxForm from './ProfileDataForm';
+import ProfileDataEdit from './ProfileDataForm';
 import ProfileData from './ProfileData';
 const ProfileInfo = (props) => {
   const onMainPhotoSelected = (e) => {
@@ -12,7 +12,6 @@ const ProfileInfo = (props) => {
   };
   const [editMode, setEditMode] = useState(false);
   const onSubmit = (formData) => {
-    debugger
     props.saveProfile(formData).then(() => {
       setEditMode(false);
     });
@@ -35,10 +34,7 @@ const ProfileInfo = (props) => {
             </div>
           </div>
           {editMode ? (
-            <ProfileDataFormReduxForm
-              profile={props.profile}
-              onSubmit={onSubmit}
-            />
+            <ProfileDataEdit profile={props.profile} onSubmit={onSubmit} />
           ) : (
             <ProfileData
               profile={props.profile}

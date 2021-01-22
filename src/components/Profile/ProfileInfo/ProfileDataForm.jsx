@@ -5,10 +5,12 @@ import {
   required,
 } from '../../../utils/validators/validators';
 import { Input, Textarea } from '../../common/FormsControls/FormsControls';
-
-const ProfileDataForm = ({ profile, handleSubmit, error }) => {
-  const maxLength = maxLengthCreator(40);
+const maxLength = maxLengthCreator(40);
+const ProfileDataEdit = (props) => {
   console.log('ProfileDataForm');
+  return <ProfileDataFormReduxForm {...props} />;
+};
+const ProfileDataForm = ({ profile, handleSubmit, error }) => {
   return (
     <form onSubmit={handleSubmit}>
       {error && <div>{error}</div>}
@@ -73,8 +75,7 @@ const ProfileDataForm = ({ profile, handleSubmit, error }) => {
     </form>
   );
 };
-
 const ProfileDataFormReduxForm = reduxForm({ form: 'editProfile' })(
   ProfileDataForm,
 );
-export default ProfileDataFormReduxForm;
+export default ProfileDataEdit;
