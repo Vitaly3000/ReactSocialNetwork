@@ -4,23 +4,43 @@ import userPhoto from '../../assets/img/user.jpg';
 
 import { NavLink } from 'react-router-dom';
 import Paginator from '../common/Paginator/Paginator';
-
-const Users = (props) => {
+import { UserType } from '../../types/types';
+type PropsType = {
+  onPageChanged: (pageNumber: number) => void;
+  currentPage: number;
+  totalUsersCount: number;
+  pageSize: number;
+  users: Array<UserType>;
+  followingInProgress: Array<number>;
+  follow: (userId: number) => void;
+  unfollow: (userId: number) => void;
+};
+const Users: React.FC<PropsType> = ({
+  onPageChanged,
+  currentPage,
+  totalUsersCount,
+  pageSize,
+  users,
+  followingInProgress,
+  follow,
+  unfollow,
+}) => {
   return (
     <div className={style.users}>
       <Paginator
-        onPageChanged={props.onPageChanged}
-        currentPage={props.currentPage}
-        totalUsersCount={props.totalUsersCount}
-        pageSize={props.pageSize}
+        onPageChanged={onPageChanged}
+        currentPage={currentPage}
+        totalUsersCount={totalUsersCount}
+        pageSize={pageSize}
+        portionSize={15}
       />
-      {props.users.map((u) => {
+      {users.map((u) => {
         return (
           <div key={u.id} className={style.user}>
             <NavLink to={'/profile/' + u.id}>
               <img
                 className={style.photo}
-                src={u.photo ? u.small : userPhoto}
+                src={u.photos.small ? u.photos.small : userPhoto}
                 alt="a sad frog"
               />
             </NavLink>
@@ -28,12 +48,12 @@ const Users = (props) => {
             <div className={style.name}>{u.name}</div>
 
             <button
-              disabled={props.followingInProgress.some((id) => id === u.id)}
+              disabled={followingInProgress.some((id: number) => id === u.id)}
               onClick={() => {
                 if (!u.followed) {
-                  props.follow(u.id);
+                  follow(u.id);
                 } else {
-                  props.unfollow(u.id);
+                  unfollow(u.id);
                 }
               }}>
               {u.followed ? 'Отписаться' : 'Подписаться'}
