@@ -69,49 +69,49 @@ const usersReducer = (state = initialState, action: any): InitialStateType => {
   }
 };
 
-type toggleFollowActionType = {
+type ToggleFollowActionType = {
   type: typeof TOGGLE_FOLLOW;
   userId: number;
 };
 
-export const toggleFollow = (userId: number): toggleFollowActionType => {
+export const toggleFollow = (userId: number): ToggleFollowActionType => {
   return { type: TOGGLE_FOLLOW, userId };
 };
-type setUsersActionType = {
+type SetUsersActionType = {
   type: typeof SET_USERS;
   users: Array<UserType>;
 };
-export const setUsers = (users: Array<UserType>): setUsersActionType => {
+export const setUsers = (users: Array<UserType>): SetUsersActionType => {
   return { type: SET_USERS, users };
 };
-type setCurrentPageActionType = {
+type SetCurrentPageActionType = {
   type: typeof SET_CURRENT_PAGE;
   pageNumber: number;
 };
 export const setCurrentPage = (
   pageNumber: number = 1,
-): setCurrentPageActionType => {
+): SetCurrentPageActionType => {
   return { type: SET_CURRENT_PAGE, pageNumber };
 };
-type setTotalUsersCountActionType = {
+type SetTotalUsersCountActionType = {
   type: typeof SET_TOTAL_USERS_COUNT;
   totalUsersCount: number;
 };
 export const setTotalUsersCount = (
   totalUsersCount: number,
-): setTotalUsersCountActionType => {
+): SetTotalUsersCountActionType => {
   return { type: SET_TOTAL_USERS_COUNT, totalUsersCount };
 };
-type toggleIsFetchingActionType = {
+type ToggleIsFetchingActionType = {
   type: typeof TOGGLE_IS_FETCHING;
   isFetching: boolean;
 };
 export const toggleIsFetching = (
   isFetching: boolean,
-): toggleIsFetchingActionType => {
+): ToggleIsFetchingActionType => {
   return { type: TOGGLE_IS_FETCHING, isFetching };
 };
-type toggleFollowingProgressActionType = {
+type ToggleFollowingProgressActionType = {
   type: typeof TOGGLE_IS_FOLLOWING_PROGRESS;
   isFetching: boolean;
   userId: number;
@@ -119,7 +119,7 @@ type toggleFollowingProgressActionType = {
 export const toggleFollowingProgress = (
   isFetching: boolean,
   userId: number,
-): toggleFollowingProgressActionType => {
+): ToggleFollowingProgressActionType => {
   return { type: TOGGLE_IS_FOLLOWING_PROGRESS, isFetching, userId };
 };
 
