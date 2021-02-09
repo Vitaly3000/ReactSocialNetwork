@@ -18,7 +18,7 @@ export type PhotosType = {
   small: string;
   large: string;
 };
-export type ProfyleType = {
+export type ProfileType = {
   userId: number;
   lookingForAJobDescription: string;
   lookingForAJob: boolean;
