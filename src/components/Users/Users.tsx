@@ -40,7 +40,7 @@ const Users: React.FC<PropsType> = ({
             <NavLink to={'/profile/' + u.id}>
               <img
                 className={style.photo}
-                src={u.photos.small ? u.photos.small : userPhoto}
+                src={u.photos.large ? u.photos.large : userPhoto}
                 alt="a sad frog"
               />
             </NavLink>
