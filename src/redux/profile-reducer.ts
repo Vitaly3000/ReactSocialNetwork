@@ -1,6 +1,6 @@
 import { stopSubmit } from 'redux-form';
 import { profileAPI } from '../api/api';
-import { PostType,ProfyleType,PhotosType } from '../types/types';
+import { PostType,ProfileType,PhotosType } from '../types/types';
 
 const ADD_POST = 'ADD_POST';
 const DELETE_POST = 'DELETE_POST';
@@ -27,7 +27,7 @@ let initialState = {
         'https://i.pinimg.com/originals/53/f9/8a/53f98a6b76f60356b2b4c261963377e6.jpg',
     },
   ] as Array<PostType>,
-  profile: null as ProfyleType | null,
+  profile: null as ProfileType | null,
   status: '' as string,
 };
 type InitialStateType = typeof initialState;
@@ -62,7 +62,7 @@ const profileReducer = (
       return { ...state, status: action.status };
     }
     case SAVE_PHOTO_SUCCESS: {
-      return { ...state, profile: { ...state.profile, photos: action.photos } as ProfyleType };
+      return { ...state, profile: { ...state.profile, photos: action.photos } as ProfileType };
     }
     default: {
       return state;
@@ -76,7 +76,7 @@ type AddPostActionType = {
 type DeletePostActionType = { type: typeof DELETE_POST; idPost: number };
 type SetUserProfileActionType = {
   type: typeof SET_USER_PROFILE;
-  userProfile: ProfyleType;
+  userProfile: ProfileType;
 };
 type SetStatusActionType = { type: typeof SET_STATUS; status: string };
 type SavePhotoSuccessActionType = {
@@ -93,7 +93,7 @@ export const deletePost = (idPost: number): DeletePostActionType => ({
 });
 
 export const setUserProfile = (
-  userProfile: ProfyleType,
+  userProfile: ProfileType,
 ): SetUserProfileActionType => {
   return {
     type: SET_USER_PROFILE,
@@ -138,7 +138,7 @@ export let savePhoto = (file: any) => {
     }
   };
 };
-export let saveProfile = (profile: ProfyleType) => {
+export let saveProfile = (profile: ProfileType) => {
   return async (dispatch: any, getState: any) => {
     const userId = getState().auth.userId;
     let data = await profileAPI.saveProfile(profile);
