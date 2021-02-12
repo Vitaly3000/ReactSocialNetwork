@@ -82,7 +82,7 @@ const LoginForm: React.FC<
           />
         </div>
       )}
-      {console.log(captchaUrl)}
+
       <button>log in</button>
       {error && <div className={style.commonError}>{error}</div>}
     </form>
