@@ -93,7 +93,7 @@ export const login = (
   email: string,
   password: string,
   rememberMe: boolean,
-  captcha: null | string,
+  captcha: string | null,
 ) => async (dispatch: any) => {
   let data = await authAPI.login(email, password, rememberMe, captcha);
   if (data.resultCode === ResultCodesEnum.Success) {
