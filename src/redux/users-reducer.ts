@@ -1,7 +1,7 @@
 import { usersAPI } from '../api/users-api';
 import { UserType } from '../types/types';
 import { BaseThunkType, InferActionsTypes } from './redux-store';
-type InitialStateType = typeof initialState;
+export type InitialStateType = typeof initialState;
 type ActionsTypes = InferActionsTypes<typeof actions>;
 type ThunkType = BaseThunkType<ActionsTypes>;
 let initialState = {
@@ -68,7 +68,7 @@ const usersReducer = (
   }
 };
 
-const actions = {
+export const actions = {
   toggleFollow: (userId: number) => {
     return { type: 'TOGGLE_FOLLOW', userId } as const;
   },
@@ -101,20 +101,20 @@ export let follow = (userId: number): ThunkType => {
   return async (dispatch) => {
     dispatch(actions.toggleFollowingProgress(true, userId));
     let data = await usersAPI.followUser(userId);
-    dispatch(actions.toggleFollowingProgress(false, userId));
     if (data.resultCode === 0) {
       dispatch(actions.toggleFollow(userId));
     }
+    dispatch(actions.toggleFollowingProgress(false, userId));
   };
 };
 export let unfollow = (userId: number): ThunkType => {
   return async (dispatch) => {
     dispatch(actions.toggleFollowingProgress(true, userId));
     let data = await usersAPI.unfollowUser(userId);
-    dispatch(actions.toggleFollowingProgress(false, userId));
     if (data.resultCode === 0) {
       dispatch(actions.toggleFollow(userId));
     }
+    dispatch(actions.toggleFollowingProgress(false, userId));
   };
 };
 
@@ -122,7 +122,7 @@ export let requestUsers = (
   currentPage: number,
   pageSize: number,
 ): ThunkType => {
-  return async (dispatch, getState) => {
+  return async (dispatch) => {
     dispatch(actions.toggleIsFetching(true));
     let data = await usersAPI.getUsers(currentPage, pageSize);
     dispatch(actions.toggleIsFetching(false));
