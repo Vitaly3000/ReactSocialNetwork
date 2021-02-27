@@ -1,10 +1,9 @@
 import React from 'react';
 import style from './Users.module.css';
-import userPhoto from '../../assets/img/user.jpg';
 
-import { NavLink } from 'react-router-dom';
 import Paginator from '../common/Paginator/Paginator';
 import { UserType } from '../../types/types';
+import User from './User';
 type PropsType = {
   onPageChanged: (pageNumber: number) => void;
   currentPage: number;
@@ -34,33 +33,13 @@ const Users: React.FC<PropsType> = ({
         pageSize={pageSize}
         portionSize={15}
       />
-      {users.map((u) => {
-        return (
-          <div key={u.id} className={style.user}>
-            <NavLink to={'/profile/' + u.id}>
-              <img
-                className={style.photo}
-                src={u.photos.large ? u.photos.large : userPhoto}
-                alt="a sad frog"
-              />
-            </NavLink>
-
-            <div className={style.name}>{u.name}</div>
-
-            <button
-              disabled={followingInProgress.some((id: number) => id === u.id)}
-              onClick={() => {
-                if (!u.followed) {
-                  follow(u.id);
-                } else {
-                  unfollow(u.id);
-                }
-              }}>
-              {u.followed ? 'Отписаться' : 'Подписаться'}
-            </button>
-          </div>
-        );
-      })}
+      {users.map((u) => (
+        <User
+          user={u}
+          unfollow={unfollow}
+          follow={follow}
+          followingInProgress={followingInProgress}></User>
+      ))}
     </div>
   );
 };

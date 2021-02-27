@@ -2,21 +2,29 @@ import React from 'react';
 import s from './Dialogs.module.css';
 import DialogItem from './DialogItem/DialogItem';
 import Message from './Message/Message';
-import { Field, reduxForm } from 'redux-form';
+import { Field, InjectedFormProps, reduxForm } from 'redux-form';
 import { Textarea } from '../common/FormsControls/FormsControls';
 import { maxLengthCreator, required } from '../../utils/validators/validators';
-
-const Dialogs = (props) => {
-  let DialogsElements = props.dialogs.map((dialog) => (
+import { initialStateType } from '../../redux/dialogs-reducer';
+type PropsType = {
+  dialogsPage: initialStateType;
+  sendMessage: (messageText: string) => void;
+};
+type NewMessageValuesFormType = {
+  newMessageText: string;
+};
+type AddMessageFormType = {};
+const Dialogs: React.FC<PropsType> = (props) => {
+  let DialogsElements = props.dialogsPage.dialogs.map((dialog) => (
     <DialogItem name={dialog.name} id={dialog.id} />
   ));
 
-  let MessagesElements = props.messages.map((message) => (
+  let MessagesElements = props.dialogsPage.messages.map((message) => (
     <Message message={message.message} />
   ));
 
-  let sendNewMessage = (value) => {
-    props.sendMessage(value.newMessageText);
+  let sendNewMessage = (values: { newMessageText: string }) => {
+    props.sendMessage(values.newMessageText);
   };
 
   return (
@@ -27,8 +35,12 @@ const Dialogs = (props) => {
     </div>
   );
 };
+
 const maxLength = maxLengthCreator(50);
-const AddMessageForm = (props) => {
+const AddMessageForm: React.FC<
+  InjectedFormProps<NewMessageValuesFormType, AddMessageFormType> &
+    AddMessageFormType
+> = (props) => {
   return (
     <form onSubmit={props.handleSubmit}>
       <div>
@@ -43,7 +55,7 @@ const AddMessageForm = (props) => {
     </form>
   );
 };
-const AddMessageFormRedux = reduxForm({
+const AddMessageFormRedux = reduxForm<NewMessageValuesFormType>({
   form: 'dialogAddMessageForm',
 })(AddMessageForm);
 export default Dialogs;

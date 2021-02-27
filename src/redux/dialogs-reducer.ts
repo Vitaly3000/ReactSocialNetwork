@@ -8,6 +8,8 @@ type MessageType = {
   message: string;
   id: number;
 };
+type ActionsTypes = InferActionsTypes<typeof actions>;
+export type initialStateType = typeof initialState;
 let initialState = {
   dialogs: [
     { name: 'Vitaly', id: 1 },
@@ -25,7 +27,7 @@ let initialState = {
     { message: 'i also feel good', id: 7 },
   ] as Array<MessageType>,
 };
-type initialStateType = typeof initialState;
+
 const dialogsReducer = (
   state = initialState,
   action: ActionsTypes,
@@ -49,7 +51,6 @@ const dialogsReducer = (
   }
 };
 
-type ActionsTypes = InferActionsTypes<typeof actions>;
 export const actions = {
   sendMessage: (newMessageText: string) => {
     return {

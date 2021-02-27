@@ -25,6 +25,9 @@ type LoginFormDataType = {
   rememberMe: boolean;
   captcha: string | null;
 };
+type LoginFormOwnProps = {
+  captchaUrl: string | null;
+};
 const LoginPage: React.FC<MapStatePropsType & MapDispatchPropsType> = (
   props,
 ) => {
@@ -42,9 +45,7 @@ const LoginPage: React.FC<MapStatePropsType & MapDispatchPropsType> = (
     </div>
   );
 };
-type LoginFormOwnProps = {
-  captchaUrl: string | null;
-};
+
 const LoginForm: React.FC<
   InjectedFormProps<LoginFormDataType, LoginFormOwnProps> & LoginFormOwnProps
 > = ({ handleSubmit, captchaUrl, error }) => {

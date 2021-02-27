@@ -1,4 +1,4 @@
-import profileReducer, { deletePost } from './profile-reducer';
+import profileReducer, { actions } from './profile-reducer';
 
 let state = {
   posts: [
@@ -17,10 +17,12 @@ let state = {
         'https://i.pinimg.com/originals/53/f9/8a/53f98a6b76f60356b2b4c261963377e6.jpg',
     },
   ],
+  profile: null,
+  status: '',
 };
 
 it('Тест на удаление поста', () => {
-  let action = deletePost(1);
+  let action = actions.deletePost(1);
   let newState = profileReducer(state, action);
   expect(newState.posts.length).toBe(1);
 });

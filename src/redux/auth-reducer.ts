@@ -4,7 +4,8 @@ import { authAPI } from '../api/auth-api';
 import { ResultCodesEnum } from '../api/api';
 import { securityApi } from '../api/security-api';
 import { InferActionsTypes, BaseThunkType } from './redux-store';
-
+type ActionsTypes = InferActionsTypes<typeof actions>;
+type ThunkType = BaseThunkType<ActionsTypes | ReturnType<typeof stopSubmit>>;
 let initialState = {
   userId: null as number | null,
   email: null as string | null,
@@ -48,8 +49,7 @@ const actions = {
     return { type: 'GET_CAPTCHA_URL_SUCCESS', captchaUrl } as const;
   },
 };
-type ActionsTypes = InferActionsTypes<typeof actions>;
-type ThunkType = BaseThunkType<ActionsTypes | ReturnType<typeof stopSubmit>>;
+
 export const getAuthUserData = (): ThunkType => async (dispatch) => {
   let data = await authAPI.me();
   if (data.resultCode === ResultCodesEnum.Success) {
