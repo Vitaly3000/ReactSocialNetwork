@@ -5,7 +5,7 @@ let initialState = {
   initialized: false,
 };
 type InitialStateType = typeof initialState;
-
+type ActionsTypes = InferActionsTypes<typeof actions>;
 const appReducer = (
   state: InitialStateType = initialState,
   action: ActionsTypes,
@@ -27,7 +27,6 @@ const actions = {
     return { type: 'INITIALIZED_SUCCESS' } as const;
   },
 };
-type ActionsTypes = InferActionsTypes<typeof actions>;
 
 export const initializeApp = () => (dispatch: any) => {
   let promise = dispatch(getAuthUserData());

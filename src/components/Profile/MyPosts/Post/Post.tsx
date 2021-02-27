@@ -1,18 +1,24 @@
-import React from 'react';
 import style from './Post.module.css';
-const Post = (props) => {
+
+type PropsType = {
+  img: string;
+  message: string;
+  idPost: number;
+  onDeletePost: (id: number) => void;
+};
+const Post: React.FC<PropsType> = ({ img, message, idPost, onDeletePost }) => {
   return (
     <div className={style.item}>
       <div className={style.item_content}>
-        {props.img ? <img src={props.img} alt="" /> : ''}
-        {props.message}
+        {img ? <img src={img} alt="" /> : ''}
+        {message}
       </div>
 
       <div className={style.btn_delete}>
-        <span>{props.idPost}</span>
+        <span>{idPost}</span>
         <button
           onClick={() => {
-            props.onDeletePost(props.idPost);
+            onDeletePost(idPost);
           }}>
           X
         </button>

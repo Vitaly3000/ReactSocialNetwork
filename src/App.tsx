@@ -6,7 +6,7 @@ import { Provider } from 'react-redux';
 import { BrowserRouter, Redirect, Switch } from 'react-router-dom';
 import { Route, withRouter } from 'react-router-dom';
 import { initializeApp } from './redux/app-reducer';
-import store from './redux/redux-store';
+import store, { AppStateType } from './redux/redux-store';
 
 import Navbar from './components/Navbar/Navbar';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
@@ -15,8 +15,11 @@ import ProfileContainer from './components/Profile/ProfileContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
 import LoginPage from './components/Login/Login';
 import Preloader from './components/common/preloader/preloader';
-
-class App extends React.Component {
+type MapPropsType = ReturnType<typeof mapStateToProps>;
+type DispatchPropsType = {
+  initializeApp: () => void;
+};
+class App extends React.Component<MapPropsType & DispatchPropsType> {
   componentDidMount() {
     this.props.initializeApp();
   }
@@ -34,7 +37,9 @@ class App extends React.Component {
         <Navbar />
         <div className="content">
           <Switch>
-          <Route path='/' exact><Redirect to='/profile'/></Route>
+            <Route path="/" exact>
+              <Redirect to="/profile" />
+            </Route>
             <Route path="/dialogs" render={() => <DialogsContainer />} />
             <Route
               path="/profile/:userId?"
@@ -49,22 +54,25 @@ class App extends React.Component {
     );
   }
 }
-let mapStateToProps = (state) => {
+let mapStateToProps = (state: AppStateType) => {
   return {
     initialized: state.app.initialized,
   };
 };
-App = compose(withRouter, connect(mapStateToProps, { initializeApp }))(App);
-const AppContainer = (props) => {
+const AppContainer = compose<React.ComponentType>(
+  withRouter,
+  connect(mapStateToProps, { initializeApp }),
+)(App);
+const SocialApp: React.FC = () => {
   return (
     <React.StrictMode>
       <BrowserRouter>
         <Provider store={store}>
-          <App />
+          <AppContainer />
         </Provider>
       </BrowserRouter>
     </React.StrictMode>
   );
 };
 
-export default AppContainer;
+export default SocialApp;

@@ -1,7 +1,16 @@
 import React from 'react';
+import { ContactsType, ProfileType } from '../../../types/types';
 import Contacts from './Contacts';
-
-const ProfileData = ({ profile, goToEditMode, isOwner }) => {
+type PropsType = {
+  profile: ProfileType;
+  isOwner: boolean;
+  goToEditMode: () => void;
+};
+const ProfileData: React.FC<PropsType> = ({
+  profile,
+  goToEditMode,
+  isOwner,
+}) => {
   return (
     <div>
       {isOwner && (
@@ -24,7 +33,7 @@ const ProfileData = ({ profile, goToEditMode, isOwner }) => {
             <Contacts
               key={key}
               contactKey={key}
-              contactValue={profile.contacts[key]}
+              contactValue={profile.contacts[key as keyof ContactsType]}
             />
           );
         })}

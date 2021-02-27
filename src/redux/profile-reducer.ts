@@ -2,7 +2,9 @@ import { stopSubmit } from 'redux-form';
 import { profileAPI } from '../api/profile-api';
 import { PostType, ProfileType, PhotosType } from '../types/types';
 import { BaseThunkType, InferActionsTypes } from './redux-store';
-
+type ActionsTypes = InferActionsTypes<typeof actions>;
+type ThunkType = BaseThunkType<ActionsTypes | ReturnType<typeof stopSubmit>>;
+type InitialStateType = typeof initialState;
 let initialState = {
   posts: [
     {
@@ -23,7 +25,7 @@ let initialState = {
   profile: null as ProfileType | null,
   status: '' as string,
 };
-type InitialStateType = typeof initialState;
+
 const profileReducer = (
   state: InitialStateType = initialState,
   action: ActionsTypes,
@@ -95,8 +97,7 @@ export const actions = {
       photos,
     } as const),
 };
-type ActionsTypes = InferActionsTypes<typeof actions>;
-type ThunkType = BaseThunkType<ActionsTypes | ReturnType<typeof stopSubmit>>;
+
 export let getUserProfile = (userId: number): ThunkType => {
   return async (dispatch) => {
     let data = await profileAPI.getProfile(userId);

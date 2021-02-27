@@ -4,9 +4,9 @@ import reportWebVitals from './reportWebVitals';
 
 import './index.css';
 
-import AppContainer from './App';
+import SocialApp from './App';
 
-ReactDOM.render(<AppContainer />, document.getElementById('root'));
+ReactDOM.render(<SocialApp />, document.getElementById('root'));
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
