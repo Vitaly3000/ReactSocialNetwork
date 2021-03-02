@@ -10,11 +10,12 @@ import store, { AppStateType } from './redux/redux-store';
 
 import Navbar from './components/Navbar/Navbar';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
-import UsersContainer from './components/Users/UsersContainer';
+
 import ProfileContainer from './components/Profile/ProfileContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
 import LoginPage from './components/Login/Login';
 import Preloader from './components/common/preloader/preloader';
+import UsersPage from './components/Users/Users';
 type MapPropsType = ReturnType<typeof mapStateToProps>;
 type DispatchPropsType = {
   initializeApp: () => void;
@@ -45,7 +46,7 @@ class App extends React.Component<MapPropsType & DispatchPropsType> {
               path="/profile/:userId?"
               render={() => <ProfileContainer />}
             />
-            <Route path="/users" render={() => <UsersContainer />} />
+            <Route path="/users" render={() => <UsersPage />} />
             <Route path="/login" render={() => <LoginPage />} />
             <Route path="*" render={() => <div>404</div>} />
           </Switch>
