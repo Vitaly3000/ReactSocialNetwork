@@ -5,26 +5,26 @@ import ProfileStatus from './ProfileStatus';
 import ProfileDataEdit from './ProfileDataForm';
 import ProfileData from './ProfileData';
 import { ProfileType } from '../../../types/types';
+import { useSelector } from 'react-redux';
+import { AppStateType } from '../../../redux/redux-store';
 
 type PropsType = {
   savePhoto: (file: File) => void;
   saveProfile: (profile: ProfileType) => Promise<any>;
-  profile: ProfileType | null;
   isOwner: boolean;
-  status: string;
-  updateStatus: (status: string) => void;
-  isAuth: boolean;
 };
 
 const ProfileInfo: React.FC<PropsType> = ({
   savePhoto,
   saveProfile,
-  profile,
   isOwner,
-  status,
-  updateStatus,
-  isAuth,
 }) => {
+  
+
+  const { profile, status } = useSelector(
+    (state: AppStateType) => state.profilePage,
+  );
+  const isAuth = useSelector((state: AppStateType) => state.auth.isAuth);
   const onMainPhotoSelected = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files?.length) {
       savePhoto(e.target.files[0]);
@@ -77,9 +77,7 @@ const ProfileInfo: React.FC<PropsType> = ({
         </div>
       )}
       <hr />
-      {isAuth && isOwner && (
-        <ProfileStatus updateStatus={updateStatus} status={status} />
-      )}
+      {isAuth && isOwner && <ProfileStatus status={status} />}
     </div>
   );
 };
