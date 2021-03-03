@@ -15,7 +15,7 @@ import ProfileContainer from './components/Profile/ProfileContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
 import LoginPage from './components/Login/Login';
 import Preloader from './components/common/preloader/preloader';
-import UsersPage from './components/Users/Users';
+import UsersPage from './components/Users/UsersPage';
 type MapPropsType = ReturnType<typeof mapStateToProps>;
 type DispatchPropsType = {
   initializeApp: () => void;

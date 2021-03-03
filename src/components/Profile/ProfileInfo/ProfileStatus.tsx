@@ -1,10 +1,13 @@
 import React, { useState, useEffect, ChangeEvent } from 'react';
+import { useDispatch } from 'react-redux';
+import { updateStatus } from '../../../redux/profile-reducer';
 type PropsType = {
   status: string;
-  updateStatus: (newStatus: string) => void;
 };
 
 const ProfileStatus: React.FC<PropsType> = (props) => {
+  const dispatch = useDispatch();
+
   let [editMode, setEditMode] = useState(false);
   let [status, setStatus] = useState(props.status);
   let activateEditMode = () => {
@@ -13,7 +16,7 @@ const ProfileStatus: React.FC<PropsType> = (props) => {
   let deactivateEditMode = (e: ChangeEvent<HTMLInputElement>) => {
     setEditMode(false);
     if (e.currentTarget.value) {
-      props.updateStatus(status);
+      dispatch(updateStatus(status));
     }
   };
   let onStatusChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -39,53 +42,5 @@ const ProfileStatus: React.FC<PropsType> = (props) => {
     </div>
   );
 };
-// class ProfileStatus extends React.Component {
-//   state = {
-//     editMode: false,
-//     status: this.props.status,
-//   };
-//   activateEditMode = () => {
-//     this.setState({
-//       editMode: true,
-//     });
-//   };
-//   deactivateEditMode = (e) => {
-//     this.setState({
-//       editMode: false,
-//     });
-//     if (e.currentTarget.value) {
-//       this.props.updateStatus(this.state.status);
-//     }
-//   };
-//   onStatusChange = (e) => {
-//     this.setState({
-//       status: e.currentTarget.value,
-//     });
-//   };
-//   componentDidUpdate(prevProps, prevState) {
-//     if (prevProps.status !== this.props.status) {
-//       this.setState({
-//         status: this.props.status,
-//       });
-//     }
-//   }
-//   render() {
-//     return (
-//       <div>
-//         {this.state.editMode ? (
-//           <input
-//             autoFocus
-//             onChange={this.onStatusChange}
-//             onBlur={this.deactivateEditMode}
-//             value={this.state.status}
-//           />
-//         ) : (
-//           <span onClick={this.activateEditMode}>
-//             {this.props.status ? this.props.status : 'Введите статус'}
-//           </span>
-//         )}
-//       </div>
-//     );
-//   }
-// }
+
 export default ProfileStatus;

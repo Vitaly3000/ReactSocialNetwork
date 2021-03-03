@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { ProfileType } from '../../types/types';
 import MyPostsContainer from './MyPosts/MyPostsContainer';
 import s from './Profile.module.css';
@@ -16,10 +17,6 @@ const Profile: React.FC<PropsType> = (props) => {
   return (
     <div className={s.Profile}>
       <ProfileInfo
-        isAuth={props.isAuth}
-        status={props.status}
-        profile={props.profile}
-        updateStatus={props.updateStatus}
         isOwner={props.isOwner}
         savePhoto={props.savePhoto}
         saveProfile={props.saveProfile}
