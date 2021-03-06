@@ -19,8 +19,6 @@ const ProfileInfo: React.FC<PropsType> = ({
   saveProfile,
   isOwner,
 }) => {
-  
-
   const { profile, status } = useSelector(
     (state: AppStateType) => state.profilePage,
   );
