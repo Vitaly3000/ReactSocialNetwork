@@ -1,5 +1,8 @@
+//@ts-ignore
 import userPhoto from '../../assets/img/user.jpg';
+
 import { NavLink } from 'react-router-dom';
+//@ts-ignore
 import style from './Users.module.css';
 import { UserType } from '../../types/types';
 

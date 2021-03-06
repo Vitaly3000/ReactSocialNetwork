@@ -1,30 +1,38 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
-import s from './Navbar.module.css';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+
+import { MailOutlined } from '@ant-design/icons';
+import { Menu } from 'antd';
+import SubMenu from 'antd/lib/menu/SubMenu';
 const Navbar = () => {
+  const [current, setCurrent] = useState('1');
+  const handleClick = (e: any): void => {
+    setCurrent(e.key);
+  };
+  
   return (
-    <nav className={s.nav}>
-      <div className={s.item}>
-        <NavLink activeClassName={s.active} to="/profile">
-          Profile
-        </NavLink>
-      </div>
-      <div className={s.item}>
-        <NavLink activeClassName={s.active} to="/dialogs">
-          Message
-        </NavLink>
-      </div>
-      <div className={s.item}>
-        <NavLink activeClassName={s.active} to="/users">
-          Users
-        </NavLink>
-      </div>
-      <div className={s.item}>
-        <NavLink activeClassName={s.active} to="/settings">
-          Settings
-        </NavLink>
-      </div>
-    </nav>
+    <Menu
+      theme={'light'}
+      onClick={handleClick}
+      style={{  height: '100%' }}
+      defaultOpenKeys={['sub1']}
+      selectedKeys={[current]}
+      mode="inline">
+      <SubMenu key="sub1" icon={<MailOutlined />} title="Navbar">
+        <Menu.Item key="1">
+          <Link to="/profile">Profile</Link>
+        </Menu.Item>
+        <Menu.Item key="2">
+          <Link to="/dialogs">Message</Link>
+        </Menu.Item>
+        <Menu.Item key="3">
+          <Link to="/users">Users</Link>
+        </Menu.Item>
+        <Menu.Item key="4">
+          <Link to="/settings">Settings</Link>
+        </Menu.Item>
+      </SubMenu>
+    </Menu>
   );
 };
 export default Navbar;

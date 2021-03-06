@@ -1,43 +1,68 @@
+import { Button, Col, Menu, Row, Layout } from 'antd';
+import Avatar from 'antd/lib/avatar/avatar';
+import { UserOutlined } from '@ant-design/icons';
+
 import React from 'react';
-import { NavLink } from 'react-router-dom';
-import s from './Header.module.css';
-type PropsType = MapPropsType & DispatchPropsType;
-export type MapPropsType = {
-  userId: number | null;
-  email: string | null;
-  login: string | null;
-  isAuth: boolean;
-};
-export type DispatchPropsType = {
-  logout: () => void;
-};
-const Header: React.FC<PropsType> = ({
-  userId,
-  email,
-  login,
-  logout,
-  isAuth,
-}) => {
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+
+import { logout } from '../../redux/auth-reducer';
+import {
+  getAuthEmail,
+  getAuthLogin,
+  getAuthUserId,
+  getIsAuth,
+} from '../../redux/auth-selectors';
+
+type PropsType = {};
+
+const Header: React.FC<PropsType> = (props) => {
+  const dispatch = useDispatch();
+  const onLogout = () => {
+    dispatch(logout());
+  };
+  const userId = useSelector(getAuthUserId);
+  const email = useSelector(getAuthEmail);
+  const login = useSelector(getAuthLogin);
+  const isAuth = useSelector(getIsAuth);
+  const { Header } = Layout;
   return (
-    <header className={s.header}>
-      <img
-        src="https://www.google.com/logos/doodles/2020/halloween-2020-6753651837108597.4-s.png"
-        alt="logo"
-      />
-      {isAuth ? (
-        <>
-          <span>id: {userId}</span>
-          <span>email: {email}</span>
-          <span>login: {login}</span>
-          <button onClick={logout}>Выйти</button>
-        </>
-      ) : (
-        <NavLink to="/login">
-          <span>Вы не вошли</span>
-          <div>email: eiz57720@cuoly.com</div>
-        </NavLink>
-      )}
-    </header>
+    <Header className="header">
+      <Row>
+        <Col span={18}>
+          <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>
+            <Menu.Item key="1">
+              <Link to="/users">Developers</Link>
+            </Menu.Item>
+          </Menu>
+        </Col>
+
+        {isAuth ? (
+          <>
+            <Col span={2}>
+              <Link to="/profile">
+                id:{userId}
+                <Avatar
+                  alt={login || ''}
+                  style={{ backgroundColor: '#87d068', marginLeft: '10px' }}
+                  icon={<UserOutlined />}
+                />
+              </Link>
+            </Col>
+            <Col span={4}>
+              <Button onClick={onLogout}>Log out</Button>
+            </Col>
+          </>
+        ) : (
+        <Col span={6} style={{color:'white'}}>
+            <Button>
+              <Link to={'/login'}>Login</Link>
+            </Button>
+            email: eiz57720@cuoly.com
+          </Col>
+        )}
+      </Row>
+    </Header>
   );
 };
 export default Header;
