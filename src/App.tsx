@@ -24,6 +24,7 @@ import { Layout } from 'antd';
 import { Footer } from 'antd/lib/layout/layout';
 
 import Header from './components/Header/Header';
+import { ChatPage } from './pages/chat/ChatPage';
 const { Sider, Content } = Layout;
 type MapPropsType = ReturnType<typeof mapStateToProps>;
 type DispatchPropsType = {
@@ -72,6 +73,7 @@ class App extends React.Component<MapPropsType & DispatchPropsType> {
                   render={() => <ProfileContainer />}
                 />
                 <Route path="/users" render={() => <UsersPage />} />
+                <Route path="/chat" render={() => <ChatPage />} />
                 <Route path="/login" render={() => <LoginPage />} />
                 <Route path="*" render={() => <div>404</div>} />
               </Switch>

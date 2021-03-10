@@ -8,7 +8,6 @@ import { Link } from 'react-router-dom';
 
 import { logout } from '../../redux/auth-reducer';
 import {
-  getAuthEmail,
   getAuthLogin,
   getAuthUserId,
   getIsAuth,
@@ -22,7 +21,6 @@ const Header: React.FC<PropsType> = (props) => {
     dispatch(logout());
   };
   const userId = useSelector(getAuthUserId);
-  const email = useSelector(getAuthEmail);
   const login = useSelector(getAuthLogin);
   const isAuth = useSelector(getIsAuth);
   const { Header } = Layout;
@@ -54,7 +52,7 @@ const Header: React.FC<PropsType> = (props) => {
             </Col>
           </>
         ) : (
-        <Col span={6} style={{color:'white'}}>
+          <Col span={6} style={{ color: 'white' }}>
             <Button>
               <Link to={'/login'}>Login</Link>
             </Button>
