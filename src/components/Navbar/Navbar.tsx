@@ -31,6 +31,9 @@ const Navbar = () => {
         <Menu.Item key="4">
           <Link to="/settings">Settings</Link>
         </Menu.Item>
+        <Menu.Item key="5">
+          <Link to="/chat">Chat</Link>
+        </Menu.Item>
       </SubMenu>
     </Menu>
   );
